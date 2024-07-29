@@ -21,6 +21,4 @@ terraform {
 }
 
 provider "cloudflare" {
-  email = "excelmyrises123@gmail.com"
-  api_key = var.cloudflare_api_token
 }

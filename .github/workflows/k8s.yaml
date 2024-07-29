@@ -3,6 +3,9 @@ name: CI
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: [self-hosted]
@@ -13,7 +16,7 @@ jobs:
     steps:
       - name: Install necessary packages for ubuntu
         run: sudo apt-get install -y jq zip
-        
+
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -25,4 +28,7 @@ jobs:
       - name: Terraform Init
         id: init
         working-directory: ./infrastructure/terraform
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
         run: terraform init

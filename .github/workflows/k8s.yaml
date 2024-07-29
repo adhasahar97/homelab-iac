@@ -2,10 +2,9 @@ name: CI
 
 on:
   workflow_dispatch:
-  
+
 permissions:
-  contents: read
-  token: write
+  secrets: read
 
 jobs:
   build:

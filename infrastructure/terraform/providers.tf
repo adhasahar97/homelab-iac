@@ -22,3 +22,7 @@ terraform {
 
 provider "cloudflare" {
 }
+
+data "cloudflare_accounts" "account" {
+  name = "excelmyrises123@gmail.com"
+}

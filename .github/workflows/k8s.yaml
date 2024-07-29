@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  token: write
+
+jobs:
+  build:
+    runs-on: [self-hosted]
+    env:
+      AWS_DEFAULT_REGION: ap-southeast-1
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install terraform
+        steps:
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.3"
+
+      - name: Terraform Init
+        id: init
+        working-directory: ./infrastructure/terraform
+        run: terraform init

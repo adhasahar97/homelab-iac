@@ -15,7 +15,6 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install terraform
-        steps:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: "1.9.3"

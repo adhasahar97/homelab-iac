@@ -3,7 +3,7 @@ resource "random_password" "tunnel_secret" {
 }
 
 resource "cloudflare_tunnel" "k8s-tunnel" {
-  account_id = data.cloudflare_user.me.id
+  account_id = "5b2f562a73bc2d4816ec68f4b653e38d"
   name       = "k8s-tunnel"
   secret     = base64sha256(random_password.tunnel_secret.result)
 }

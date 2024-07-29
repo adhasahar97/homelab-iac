@@ -17,6 +17,9 @@ jobs:
       AWS_DEFAULT_REGION: ap-southeast-1
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      # CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+      # CLOUDFLARE_EMAIL: excelmyrises123@gmail.com
     steps:
       - name: Install necessary packages for ubuntu
         run: sudo apt-get install -y jq zip
@@ -44,7 +47,6 @@ jobs:
         working-directory: ./infrastructure/terraform
         run: |
           terraform plan \
-          -var="cloudflare_api_token=${{ secrets.CLOUDFLARE_API_KEY }}" \
           -no-color
         continue-on-error: true
 
@@ -112,5 +114,4 @@ jobs:
         working-directory: ./infrastructure/terraform
         run: |
           terraform apply \
-          -var="cloudflare_api_token=${{ secrets.CLOUDFLARE_API_KEY }}" \
           -no-color -auto-approve

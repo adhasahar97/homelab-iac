@@ -1,7 +1,11 @@
+resource "random_password" "tunnel_secret" {
+  length = 64
+}
+
 resource "cloudflare_tunnel" "k8s-tunnel" {
   account_id = data.cloudflare_user.me.id
   name       = "k8s-tunnel"
-  secret     = "AQIDBAUGBwgBAgMEBQYHCAECAwQFBgcIAQIDBAUGBwg="
+  secret     = base64sha256(random_password.tunnel_secret.result)
 }
 resource "kubernetes_namespace" "ingress-nginx" {
   metadata {

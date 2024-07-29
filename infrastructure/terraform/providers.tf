@@ -10,6 +10,9 @@ provider "helm" {
 
 terraform {
   required_providers {
+    random = {
+      source = "hashicorp/random"
+    }
     cloudflare = {
       source  = "cloudflare/cloudflare"
       version = "~> 4.0"
@@ -18,5 +21,6 @@ terraform {
 }
 
 provider "cloudflare" {
-  api_token = var.cloudflare_api_token
+  email = "excelmyrises123@gmail.com"
+  api_key = var.cloudflare_api_token
 }
